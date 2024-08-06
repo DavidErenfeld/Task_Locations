@@ -1,0 +1,40 @@
+.map {
+  width: 100%;
+  height: 100%;
+  border-radius: 9px;
+  position: relative;
+}
+.zoom-buttons {
+  position: absolute;
+  top: 2.6rem;
+  right: 2.6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.zoom-button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #333;
+  font-size: 20px;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.zoom-button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.zoom-in {
+  border-radius: 5px 5px 0 0;
+}
+
+.zoom-out {
+  border-radius: 0 0 5px 5px;
+}
