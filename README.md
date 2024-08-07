@@ -4,6 +4,10 @@
 
 This project is a web application designed to display a map of Starbucks locations based on the user's country selection. It utilizes OpenLayers for map rendering and React for the frontend structure.
 
+## Live
+
+https://starbucks-locations.netlify.app/
+
 ## Project Structure
 
 - `public/`: Contains static assets and the `index.html` file.
