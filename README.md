@@ -1,18 +1,21 @@
-Task:
-Create a web page (can be either deployed on the web or served locally).
-The web page should show an Open Layers map. On the map show all the Starbucks store location
-according to the list found here. (The list updates so, needs to be fetched every time the page loads).
-On the side of the map insert a selection box containing the names of all countries (see attached list).
-When the user selects a country from the list, the map should only show the Starbucks stores whose
-location fall inside the polygon representing the countries’ territorie for the attached list.
+# Starbucks Locations Map
 
-- Filtering should be based only on geographic coordinates.
+## Overview
 
-Bonus: create a service the receives the coordinates of a store and a 3-letter code of a country. The
-service should return whether the location is inside the relevant country. This service should be
-deployed as a docker container and used by the main web page.
+This project is a web application designed to display a map of Starbucks locations based on the user's country selection. It utilizes OpenLayers for map rendering and React for the frontend structure.
 
-- Feel free to use Turf, Proj4 or any other package you want.
-  \*\* the interview will be based on the task so please have the full code available for the interview.
+## Project Structure
 
-Good Luck 😀
+- `public/`: Contains static assets and the `index.html` file.
+- `src/`:
+  - `Components/`: React components for different parts of the application.
+    - `CountrySelector/`: Component for selecting a country.
+    - `Header/`: Top navigation bar.
+    - `LocationChecker/`: Component to check if a location is inside a selected country.
+    - `Loader/`: Loading animation display.
+    - `MainPage/`: Main landing page that hosts the map and country selector.
+  - `contexts/`: Contexts for global state management.
+  - `Hooks/`: Custom React hooks.
+  - `Utils/`: Utility functions, including geo-spatial operations.
+- `geojson/`: GeoJSON files used for mapping operations.
+- `.redirects`: Netlify redirects configuration for SPA routing.
