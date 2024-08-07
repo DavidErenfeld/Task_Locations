@@ -10,21 +10,34 @@ const initialState = {
   error: null,
 };
 
+const actionTypes = {
+  SET_STORES: "SET_STORES",
+  SET_COUNTRIES: "SET_COUNTRIES",
+  FILTER_STORES: "FILTER_STORES",
+  SET_ERROR: "SET_ERROR",
+  START_LOADING: "START_LOADING",
+  FINISH_LOADING: "FINISH_LOADING",
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SET_STORES":
+    case actionTypes.SET_STORES:
       return {
         ...state,
         stores: action.payload,
         filteredStores: action.payload,
         loading: false,
       };
-    case "SET_COUNTRIES":
+    case actionTypes.SET_COUNTRIES:
       return { ...state, countries: action.payload };
-    case "FILTER_STORES":
+    case actionTypes.FILTER_STORES:
       return { ...state, filteredStores: action.payload };
-    case "SET_ERROR":
+    case actionTypes.SET_ERROR:
       return { ...state, error: action.payload, loading: false };
+    case actionTypes.START_LOADING:
+      return { ...state, loading: true };
+    case actionTypes.FINISH_LOADING:
+      return { ...state, loading: false };
     default:
       return state;
   }
@@ -34,27 +47,27 @@ export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    dispatch({ type: actionTypes.START_LOADING });
     fetch(
       "https://raw.githubusercontent.com/mmcloughlin/starbucks/master/locations.json"
     )
       .then((response) => response.json())
       .then((data) => {
-        dispatch({ type: "SET_STORES", payload: data });
-        dispatch({ type: "FILTER_STORES", payload: data });
+        dispatch({ type: actionTypes.SET_STORES, payload: data });
+        dispatch({ type: actionTypes.FILTER_STORES, payload: data });
 
         const uniqueCountries = Array.from(
           new Set(data.map((store) => store.country))
-        ).map((countryCode) => {
-          return {
-            code: countryCode,
-            name: countryCode,
-          };
-        });
-        dispatch({ type: "SET_COUNTRIES", payload: uniqueCountries });
+        ).map((countryCode) => ({
+          code: countryCode,
+          name: countryCode, // Consider mapping to actual names if available
+        }));
+        dispatch({ type: actionTypes.SET_COUNTRIES, payload: uniqueCountries });
+        dispatch({ type: actionTypes.FINISH_LOADING });
       })
       .catch((error) => {
         dispatch({
-          type: "SET_ERROR",
+          type: actionTypes.SET_ERROR,
           payload: "Failed to load store locations: " + error.message,
         });
       });
