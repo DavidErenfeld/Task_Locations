@@ -11,6 +11,8 @@ function LocationChecker() {
   const [countryCode, setCountryCode] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [dangerColor, setDangerColor] = useState(false);
+
   const navigate = useNavigate();
 
   const checkLocation = async () => {
@@ -33,8 +35,10 @@ function LocationChecker() {
 
       const data = await response.json();
       if (data.inside) {
+        setDangerColor(false);
         setMessage("The location is inside the country.");
       } else {
+        setDangerColor(true);
         setMessage("The location is not inside the country.");
       }
     } catch (error) {
@@ -47,6 +51,8 @@ function LocationChecker() {
   const handleClose = () => {
     navigate("/");
   };
+
+  let messageColor = dangerColor ? "danger-color" : "";
 
   return (
     <section className="location-checker-section">
@@ -82,7 +88,11 @@ function LocationChecker() {
         </button>
       </div>
 
-      {isLoading ? <LoadingDots /> : <p className="message">{message}</p>}
+      {isLoading ? (
+        <LoadingDots />
+      ) : (
+        <p className={`message ${messageColor}`}>{message}</p>
+      )}
     </section>
   );
 }

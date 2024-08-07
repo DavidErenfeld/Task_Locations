@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CountrySelector from "../Components/CountrySelector";
+import CountrySelector from "../CountrySelector";
 import "./style.css";
 
 const Header = ({ handleCountrySelect }) => {

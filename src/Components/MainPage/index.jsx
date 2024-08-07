@@ -1,8 +1,8 @@
 import useCountryCodes from "../../Hooks/useCountryCodes";
-import Header from "../../Header";
 import { useStore } from "../../contexts/storeContext";
 import { filterStoresByCountry } from "../../Utils/filterUtils";
 import MapComponent from "../MapComponent";
+import Header from "../Header";
 import "./style.css";
 
 const MainPage = () => {

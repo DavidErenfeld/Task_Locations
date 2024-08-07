@@ -47,12 +47,13 @@ export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    dispatch({ type: actionTypes.START_LOADING });
-    fetch(
-      "https://raw.githubusercontent.com/mmcloughlin/starbucks/master/locations.json"
-    )
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchStores = async () => {
+      dispatch({ type: actionTypes.START_LOADING });
+      try {
+        const response = await fetch(
+          "https://raw.githubusercontent.com/mmcloughlin/starbucks/master/locations.json"
+        );
+        const data = await response.json();
         dispatch({ type: actionTypes.SET_STORES, payload: data });
         dispatch({ type: actionTypes.FILTER_STORES, payload: data });
 
@@ -60,17 +61,20 @@ export const StoreProvider = ({ children }) => {
           new Set(data.map((store) => store.country))
         ).map((countryCode) => ({
           code: countryCode,
-          name: countryCode, 
+          name: countryCode,
         }));
         dispatch({ type: actionTypes.SET_COUNTRIES, payload: uniqueCountries });
-        dispatch({ type: actionTypes.FINISH_LOADING });
-      })
-      .catch((error) => {
+      } catch (error) {
         dispatch({
           type: actionTypes.SET_ERROR,
           payload: "Failed to load store locations: " + error.message,
         });
-      });
+      } finally {
+        dispatch({ type: actionTypes.FINISH_LOADING });
+      }
+    };
+
+    fetchStores();
   }, []);
 
   return (
