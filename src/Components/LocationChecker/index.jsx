@@ -3,15 +3,18 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
+import LoadingDots from "../Loader";
 
 function LocationChecker() {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [countryCode, setCountryCode] = useState("");
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const checkLocation = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(
         "https://geo-location-service-b0911ef2477e.herokuapp.com/check-location",
@@ -38,6 +41,7 @@ function LocationChecker() {
       console.error("Error:", error);
       setMessage("Failed to check the location.");
     }
+    setIsLoading(false);
   };
 
   const handleClose = () => {
@@ -50,6 +54,7 @@ function LocationChecker() {
         <FontAwesomeIcon icon={faTimes} />
       </div>
       <h1 className="title">Check Location Inside Country</h1>
+
       <div className="input-container">
         <input
           className="input"
@@ -72,11 +77,12 @@ function LocationChecker() {
           onChange={(e) => setCountryCode(e.target.value)}
           placeholder="Enter country code (3 letters)"
         />
+        <button className="btn" onClick={checkLocation}>
+          Check Location
+        </button>
       </div>
-      <button className="btn" onClick={checkLocation}>
-        Check Location
-      </button>
-      <p className="message">{message}</p>
+
+      {isLoading ? <LoadingDots /> : <p className="message">{message}</p>}
     </section>
   );
 }
