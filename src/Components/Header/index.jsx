@@ -12,7 +12,7 @@ const Header = ({ handleCountrySelect }) => {
 
   return (
     <section className="header">
-      <p className="logo">Starbucks locations</p>
+      <p className="logo">locations Task</p>
       <nav>
         <div>
           <CountrySelector onSelect={handleCountrySelect} />
