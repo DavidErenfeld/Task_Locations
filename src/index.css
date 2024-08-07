@@ -1,8 +1,46 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
+/*
+- Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+- Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/
+
+* {
   padding: 0;
+  margin: 0;
   box-sizing: border-box;
+}
+
+:root {
+  /* Fonts and text settings */
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* General settings and base colors */
+  line-height: 1.5;
+  color-scheme: light dark;
+  overflow-x: hidden;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  width: auto;
+}
+
+body {
+  font-family: "Exo", sans-serif;
+  position: relative;
+  margin: 0;
+  min-height: 100vh;
+  background-color: #8ba5fc;
+  color: #172554;
+  overflow-x: hidden;
 }
 
 .visually-hidden {
@@ -14,4 +52,23 @@ body {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+.btn {
+  font-size: 1.6rem;
+  font-weight: 500;
+  font-family: inherit;
+  border: none;
+  padding: 1rem 1.4rem;
+  border-radius: 7px;
+  background-color: #082f49;
+  color: #fff;
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+
+.btn:hover {
+  background-color: #fff;
+  color: #0b0e19;
+  outline: none;
 }

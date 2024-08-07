@@ -13,74 +13,73 @@ import { fromLonLat } from "ol/proj";
 import { defaults as defaultControls } from "ol/control";
 import "./style.css";
 
+const createMap = (mapRef, stores) => {
+  const vectorSource = new VectorSource({
+    features: stores.map(
+      (store) =>
+        new Feature({
+          geometry: new Point(fromLonLat([store.longitude, store.latitude])),
+          name: store.name,
+        })
+    ),
+  });
+
+  const vectorLayer = new VectorLayer({
+    source: vectorSource,
+    style: new Style({
+      image: new Icon({
+        anchor: [0.5, 0.5],
+        src: "https://openlayers.org/en/v6.14.1/examples/data/icon.png",
+        scale: 0.5,
+      }),
+    }),
+  });
+
+  return new Map({
+    target: mapRef.current,
+    layers: [
+      new TileLayer({
+        source: new XYZ({
+          url: "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          maxZoom: 19,
+        }),
+      }),
+      vectorLayer,
+    ],
+    view: new View({
+      center: fromLonLat([0, 0]),
+      zoom: 2,
+    }),
+    controls: defaultControls({
+      zoom: false,
+      attribution: false,
+    }),
+  });
+};
+
 const MapComponent = ({ stores }) => {
   const mapRef = useRef();
   const mapInstance = useRef();
 
   useEffect(() => {
-    try {
-      const vectorSource = new VectorSource({
-        features: stores.map(
-          (store) =>
-            new Feature({
-              geometry: new Point(
-                fromLonLat([store.longitude, store.latitude])
-              ),
-              name: store.name,
-            })
-        ),
-      });
-
-      const vectorLayer = new VectorLayer({
-        source: vectorSource,
-        style: new Style({
-          image: new Icon({
-            anchor: [0.5, 0.5],
-            src: "https://openlayers.org/en/v6.14.1/examples/data/icon.png",
-            scale: 0.5,
-          }),
-        }),
-      });
-
-      const map = new Map({
-        target: mapRef.current,
-        layers: [
-          new TileLayer({
-            source: new XYZ({
-              url: "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-              maxZoom: 19,
-            }),
-          }),
-          vectorLayer,
-        ],
-        view: new View({
-          center: fromLonLat([0, 0]),
-          zoom: 2,
-        }),
-        controls: defaultControls({
-          zoom: false, // Disable default zoom controls
-          attribution: false, // Disable default attribution control if needed
-        }),
-      });
-
-      mapInstance.current = map;
-
-      return () => map.setTarget(null);
-    } catch (error) {
-      console.error("Error initializing the map:", error);
+    if (mapRef.current && stores) {
+      mapInstance.current = createMap(mapRef, stores);
     }
+    return () => {
+      if (mapInstance.current) {
+        mapInstance.current.setTarget(null);
+      }
+    };
   }, [stores]);
 
   const zoomIn = () => {
     const view = mapInstance.current.getView();
-    const zoom = view.getZoom();
-    view.setZoom(zoom + 1);
+    view.setZoom(view.getZoom() + 1);
   };
 
   const zoomOut = () => {
     const view = mapInstance.current.getView();
-    const zoom = view.getZoom();
-    view.setZoom(zoom - 1);
+    view.setZoom(view.getZoom() - 1);
   };
 
   return (

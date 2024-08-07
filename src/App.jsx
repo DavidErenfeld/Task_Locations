@@ -1,10 +1,11 @@
 import React from "react";
-import MapComponent from "./Components/MapComponent";
-import CountrySelector from "./Components/CountrySelector";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LocationChecker from "./Components/LocationChecker";
 import { filterStoresByCountry } from "./Utils/filterUtils";
 import { useStore } from "./contexts/storeContext";
-import "./App.css";
 import useCountryCodes from "./Hooks/useCountryCodes";
+import "./App.css";
+import MainPage from "./Components/MainPage";
 
 const App = () => {
   const { state, dispatch } = useStore();
@@ -24,10 +25,12 @@ const App = () => {
   };
 
   return (
-    <main className="main-page">
-      <CountrySelector onSelect={handleCountrySelect} />
-      <MapComponent stores={state.filteredStores} />
-    </main>
+    <Router>
+      <Routes>
+        <Route path="/location-checker" element={<LocationChecker />} />
+        <Route path="/" element={<MainPage />} />
+      </Routes>
+    </Router>
   );
 };
 

@@ -4,10 +4,15 @@
   border-radius: 9px;
   position: relative;
 }
+
+.Loading {
+  width: 100%;
+  margin: auto 0;
+}
 .zoom-buttons {
   position: absolute;
-  top: 2.6rem;
-  right: 2.6rem;
+  top: 11rem;
+  left: 2.8rem;
   display: flex;
   flex-direction: column;
 }
@@ -17,8 +22,8 @@
   border: 1px solid #ccc;
   color: #333;
   font-size: 20px;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 4rem;
+  height: 4rem;
   cursor: pointer;
   display: flex;
   align-items: center;

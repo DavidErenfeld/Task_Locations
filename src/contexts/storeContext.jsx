@@ -60,7 +60,7 @@ export const StoreProvider = ({ children }) => {
           new Set(data.map((store) => store.country))
         ).map((countryCode) => ({
           code: countryCode,
-          name: countryCode, // Consider mapping to actual names if available
+          name: countryCode, 
         }));
         dispatch({ type: actionTypes.SET_COUNTRIES, payload: uniqueCountries });
         dispatch({ type: actionTypes.FINISH_LOADING });

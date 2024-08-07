@@ -1,0 +1,28 @@
+/* .selector-section {
+  width: 100%;
+} */
+
+.selector-section {
+  margin: 1rem 0;
+}
+
+.form-select:active,
+.form-select {
+  font-size: 1.6rem;
+  font-weight: 500;
+  font-family: inherit;
+  border: none;
+  padding: 1rem 1.4rem;
+  border-radius: 7px;
+  background-color: #082f49;
+  color: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.form-select:focus,
+.form-select:hover {
+  background-color: #fff;
+  color: #0b0e19;
+  outline: none;
+}
