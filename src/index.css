@@ -72,3 +72,17 @@ body {
   color: #0b0e19;
   outline: none;
 }
+
+/*768*/
+@media (max-width: 48em) {
+  html {
+    font-size: 52%;
+  }
+}
+
+/*400*/
+@media (max-width: 25em) {
+  .btn {
+    padding: 1rem 1rem;
+  }
+}

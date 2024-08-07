@@ -26,3 +26,11 @@
   color: #0b0e19;
   outline: none;
 }
+
+/*624*/
+@media (max-width: 48em) {
+  .form-select:active,
+  .form-select {
+    padding: 1rem 0.2rem;
+  }
+}

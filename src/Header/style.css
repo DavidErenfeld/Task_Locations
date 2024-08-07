@@ -18,3 +18,28 @@ nav {
   justify-content: center;
   gap: 2rem;
 }
+
+/*624*/
+@media (max-width: 48em) {
+  .header {
+    flex-direction: column;
+    padding: 2rem;
+    padding-top: 0rem;
+    width: 100%;
+  }
+}
+
+/*400*/
+@media (max-width: 25em) {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem;
+  }
+
+  nav {
+    /* flex-direction: column; */
+    gap: 1rem;
+  }
+}

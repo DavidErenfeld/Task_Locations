@@ -9,6 +9,7 @@
   width: 100%;
   margin: auto 0;
 }
+
 .zoom-buttons {
   position: absolute;
   top: 11rem;
@@ -42,4 +43,18 @@
 
 .zoom-out {
   border-radius: 0 0 5px 5px;
+}
+
+/*624*/
+@media (max-width: 48em) {
+  .zoom-buttons {
+    top: 15.8rem;
+  }
+}
+
+/*400*/
+@media (max-width: 25em) {
+  .zoom-buttons {
+    top: 20.2rem;
+  }
 }
