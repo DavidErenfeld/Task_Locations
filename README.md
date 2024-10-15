@@ -6,7 +6,7 @@ This project is a web application designed to display a map of Starbucks locatio
 
 ## Live
 
-https://starbucks-locations.netlify.app/
+https://task-locations-david-erenfeld.netlify.app/
 
 ## Project Structure
 
